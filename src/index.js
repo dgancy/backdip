@@ -34,7 +34,7 @@ app.get('/login/name/:name/password/:password', (req,res) => {
   })
 })
 
-app.get('/mistakeUpdate/userID/ID/:id/mistakes/:mistakes', (req,res) => {
+app.get('/mistakeUpdate/userID/:id/mistakes/:mistakes', (req,res) => {
   connection.query(`update users set UserMistakes='${req.params['mistakes']}' where UserID = '${req.params['UserID']}'`, (err,result,fields) => {
     if (err) {
       res.send(err)
