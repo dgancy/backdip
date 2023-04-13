@@ -16,15 +16,11 @@ const port = 3000
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-app.get('/login/name/:name/password/:password', (req,res) => {
+app.post('/login/name/:name/password/:password', (req,res) => {
   connection.query(`select * from users where UserPassword = '${req.params['password']}' `, (err,result,fields) => {
     if (result.length != 0) {
       res.send(result)
@@ -34,7 +30,7 @@ app.get('/login/name/:name/password/:password', (req,res) => {
   })
 })
 
-app.get('/mistakeUpdate/userID/:id/mistakes/:mistakes', (req,res) => {
+app.post('/mistakeUpdate/userID/:id/mistakes/:mistakes', (req,res) => {
   connection.query(`update users set UserMistakes='${req.params['mistakes']}' where UserID = '${req.params['UserID']}'`, (err,result,fields) => {
     if (err) {
       res.send(err)
